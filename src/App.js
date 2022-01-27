@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+//import logo from './logo.svg';  <img src={logo} className="App-logo" alt="logo" />
 import './App.css';
+import CssBaseline from '@mui/material/CssBaseline';
+import TheList from './components/theList';
+import { AppBar, Container, Toolbar, Typography } from '@mui/material';
+import { Edit } from '@mui/icons-material';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  return (  
+    <div>
+      <CssBaseline enableColorScheme />
+      <AppBar position="relative">
+        <Toolbar>
+          <Edit />
+          <Typography variant="h6">
+            An API based ToDo app with MateriaUI
+          </Typography>
+        </Toolbar>
+       </AppBar>
+      
+      <main>
+         
+        <TheList />  
+      
+      </main>
     </div>
   );
 }
