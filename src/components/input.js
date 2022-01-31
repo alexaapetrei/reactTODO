@@ -1,51 +1,45 @@
-import React, {Component} from "react";
+import React, {useState} from "react";
 import axios from "axios";
-import { TextField } from "@mui/material";
-import { Button } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
 import Stack from '@mui/material/Stack';
-import { styled } from '@mui/material/styles';
 import { Box } from "@mui/system";
 import Grid from '@mui/material/Grid';
+import {makeStyles} from '@mui/styles';
 
+const useStyles = makeStyles((theme)=>({
 
-class InputData extends Component{
-    constructor() {
-        super()
-        this.state = {
-            task : ""
-        }
-    }
+}))
 
+function InputData(props) {
 
-handleChange = e => {
-    this.setState({
-        task: e.target.value
-    })
+const [task, setTask] = useState("")
+
+function handleChange(event) {
+    setTask(event.value)
 }
 
-handleSubmit = e => {
-    axios.post("/api", {task:this.state.task}).then(response =>
-        this.props.addTask(response.data)
+function handleSubmit(e) {
+     axios.post("/api", {task:task}).then(response =>
+         props.addTask(response.data)
         )
-    e.preventDefault()
-    this.state.task =""
+     e.preventDefault()
+     setTask("")
+    
     
 }
-render() {
     return(
-        <Box sx={{ flexGrow: 1 }}>
-        <form onSubmit={this.handleSubmit}>
+        <form sx={{ flexGrow: 1 }} onSubmit={e => {handleSubmit(e)}}>
         
-            <Grid container spacing={2}>
+            <Grid container spacing={2} alignItems="center">
             <Grid item xs={8}>
                  
           
              <TextField id="outlined-basic"
                 label="Add a task here" 
                 variant="outlined" 
-                value={this.state.task} 
-                onChange={this.handleChange}
+                value={task} 
+                onChange={e => setTask(e.target.value)}
                 size="small"
                 fullWidth
                 
@@ -53,7 +47,8 @@ render() {
             </Grid>
             <Grid item xs={4}>
             <Button variant="outlined" 
-                    size="medium"  
+                    size="medium"
+
                     fullWidth 
                     endIcon={<SendIcon />}
                     type="submit"
@@ -63,9 +58,7 @@ render() {
         </Grid>  
         
         </form>
-        </Box>
     ) 
-}
-}
+    }
 
 export default InputData

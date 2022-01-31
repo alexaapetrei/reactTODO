@@ -6,7 +6,7 @@ import { Edit } from '@mui/icons-material';
 
 function App() {
   return (  
-    <div>
+    <>
       <CssBaseline enableColorScheme />
       <AppBar position="relative">
         <Toolbar>
@@ -22,7 +22,7 @@ function App() {
         <TheList />  
       
       </main>
-    </div>
+    </>
   );
 }
 
