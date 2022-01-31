@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# A small react app to learn Material UO
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+So yeah , all the create react app stff plus some more things that I'm getting to know better .
 
 ## Available Scripts
 
