@@ -1,7 +1,7 @@
 {
   "name": "sfe",
   "version": "0.1.0",
-  "proxy": "http://localhost:8491",
+  "proxy": "https://tame-culottes-lamb.cyclic.app",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.1",
