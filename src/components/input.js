@@ -24,7 +24,7 @@ function handleSubmit(e) {
         e.preventDefault()
         return ;
     }
-     axios.post("/api", {task:task})
+     axios.post("https://tame-culottes-lamb.cyclic.app/api", {task:task})
             .then(response =>
                 props.addTask(response.data)
             )
