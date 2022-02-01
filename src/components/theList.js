@@ -12,7 +12,6 @@ function TheList(props) {
     useEffect( () => (
         axios.get("/api").then(response => {
             setTasks(response.data)
-            console.log(tasks)
         })  
         
     ),[])
@@ -22,7 +21,7 @@ function TheList(props) {
         console.log(val)
         let editedTask = prompt("Change the task to: ", val.task)
         if(editedTask == null || editedTask === ""){
-            console.log("we didant change shit")
+            console.log("we didant change it")
         }
         else {
                axios.put("/api/"+val.id,{done:val.done,task:editedTask}) 
@@ -51,10 +50,10 @@ function TheList(props) {
     }
 
     function AddTask(val) {
-        if (!val.task) { return; }
-        
-          const newList = [val, ...tasks]; 
-          setTasks(newList);                  
+       
+            const newList = [val, ...tasks]; 
+            setTasks(newList);   
+                    
     }
 
      return(

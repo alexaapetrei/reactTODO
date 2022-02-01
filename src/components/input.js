@@ -20,9 +20,14 @@ function handleChange(event) {
 }
 
 function handleSubmit(e) {
-     axios.post("/api", {task:task}).then(response =>
-         props.addTask(response.data)
-        )
+    if(!task){
+        e.preventDefault()
+        return ;
+    }
+     axios.post("/api", {task:task})
+            .then(response =>
+                props.addTask(response.data)
+            )
      e.preventDefault()
      setTask("")
     
