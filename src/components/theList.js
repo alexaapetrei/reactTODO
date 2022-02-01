@@ -1,27 +1,23 @@
-import React, {Component, useState} from "react";
+import React, {useState, useEffect} from "react";
 import axios from "axios";
 import ATask from "./aTask";
 import InputData from "./input";
 import List from '@mui/material/List';
 import { Container } from "@mui/material";
 
-export default class TheList extends Component {
-    constructor(props){
-         super(props);
-         this.state = {
-             tasks: []
-         }
-    }
+function TheList(props) {
 
-    componentDidMount = () => {
+    const [tasks,setTasks] = useState([])
+
+    useEffect( () => (
         axios.get("/api").then(response => {
-            this.setState({
-                tasks : response.data
-                })
-        })
-    }
+            setTasks(response.data)
+            console.log(tasks)
+        })  
+        
+    ),[])
 
-    EditATask(val) {
+    function EditATask(val) {
         console.log("we are editing somehtign "+ val.id)
         console.log(val)
         let editedTask = prompt("Change the task to: ", val.task)
@@ -31,62 +27,56 @@ export default class TheList extends Component {
         else {
                axios.put("/api/"+val.id,{done:val.done,task:editedTask}) 
                window.location.reload()
-          
-            
         }
     }
 
-    removeTask = (id) => {
+    function removeTask(id) {
 
         axios.delete("/api", {data:{id:id}})
       
-        const removedArr = this.state.tasks.filter((todo) => todo.id !== id);
-        this.setState({ tasks : removedArr });
+        const removedArr = tasks.filter((todo) => todo.id !== id);
+        setTasks( removedArr );
     }
 
-    ToggleDone = (val) => {
+    function ToggleDone(val) {
       
-      let updatedTodos = this.state.tasks.map((todo) => {
+      let updatedTodos = tasks.map((todo) => {
         if (todo.id === val.id) {
           todo.done = !todo.done;
           axios.put("/api/"+val.id,{done:todo.done,task:val.task})
         }
         return todo;
       });
-      this.setState({tasks : updatedTodos});
+      setTasks(updatedTodos);
     }
 
-    AddTask = (val) => {
-        if (!val.task) {
-            return;
-          }
+    function AddTask(val) {
+        if (!val.task) { return; }
         
-          const newList = [val, ...this.state.tasks];
-        
-          this.setState({tasks: newList});
-          
-        
-                
+          const newList = [val, ...tasks]; 
+          setTasks(newList);                  
     }
 
- render() {
      return(
          
         <Container>
-            <InputData addTask={this.AddTask} />
+            <InputData addTask={AddTask} />
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
-            {this.state.tasks.map((task) =>
+            
+             {tasks.map((task) =>
              <ATask 
                 task={task.task} id={task.id} done={task.done} key={task.id} 
-                editHandler={this.editATask}
-                removeTask={this.removeTask}
-                toggleDone={this.ToggleDone}
-                editATask={this.EditATask}
+                editHandler={EditATask}
+                removeTask={removeTask}
+                toggleDone={ToggleDone}
+                editATask={EditATask}
              />
-            )}
+            )} 
             </List>
         </Container>
          
      )
-     }
+     
 }
+
+export default TheList
