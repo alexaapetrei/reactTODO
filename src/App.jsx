@@ -15,12 +15,13 @@ const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 function App() {
   // the api is live on :
   // https://tame-culottes-lamb.cyclic.app/api/
+  // http://localhost:8491/api/
   const theme = useTheme();
   const colorMode = React.useContext(ColorModeContext);
 
   return (  
     <>
-      <theAPI.Provider value="http://localhost:8491/api/">
+      <theAPI.Provider value="https://tame-culottes-lamb.cyclic.app/api/">
       <CssBaseline enableColorScheme />
 
         <NavBar>

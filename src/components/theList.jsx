@@ -17,17 +17,22 @@ function TheList(props) {
         
     ),[])
 
-    function EditATask(val) {
-        console.log("we are --   "+ val.task)
-        console.log(val)
-        let editedTask = prompt("Change the task to: ", val.task)
-        if(editedTask == null || editedTask === "" || editedTask == val.task){
+    function EditATask(etask, val) {
+        let theID = val.id
+        let theTruth = true
+  
+        if(!val.done) {
+          theTruth = false }    
+          
+        
+        if(etask == null || etask === ""){
             console.log("we didant change it")
         }
         else {
-               axios.put(api+val.id,{done:val.done,task:editedTask})
+               axios.put(api+theID,{done:theTruth,task:etask})
                .then(
-                 window.location.reload()
+                 console.log("I think we did edit it")
+                 //window.location.reload()
                  ) 
               
         }
@@ -59,6 +64,8 @@ function TheList(props) {
             setTasks(newList);   
                     
     }
+
+    
 
      return(
         <main>
