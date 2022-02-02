@@ -1,16 +1,17 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import axios from "axios";
 import ATask from "./aTask";
 import InputData from "./input";
 import List from '@mui/material/List';
 import { Container } from "@mui/material";
+import { theAPI } from "../App";
 
 function TheList(props) {
-
+ const api = useContext(theAPI)
     const [tasks,setTasks] = useState([])
 
     useEffect( () => (
-        axios.get("https://tame-culottes-lamb.cyclic.app/api").then(response => {
+        axios.get(api).then(response => {
             setTasks(response.data)
         })  
         
@@ -24,14 +25,15 @@ function TheList(props) {
             console.log("we didant change it")
         }
         else {
-               axios.put("https://tame-culottes-lamb.cyclic.app/api/"+val.id,{done:val.done,task:editedTask}) 
-               window.location.reload()
+               axios.put(api+val.id,{done:val.done,task:editedTask})
+               .then(window.location.reload()) 
+              
         }
     }
 
     function removeTask(id) {
 
-        axios.delete("https://tame-culottes-lamb.cyclic.app/api", {data:{id:id}})
+        axios.delete(api, {data:{id:id}})
       
         const removedArr = tasks.filter((todo) => todo.id !== id);
         setTasks( removedArr );
@@ -42,7 +44,7 @@ function TheList(props) {
       let updatedTodos = tasks.map((todo) => {
         if (todo.id === val.id) {
           todo.done = !todo.done;
-          axios.put("https://tame-culottes-lamb.cyclic.app/api/"+val.id,{done:todo.done,task:val.task})
+          axios.put(api+val.id,{done:todo.done,task:val.task})
         }
         return todo;
       });

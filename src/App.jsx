@@ -1,12 +1,16 @@
 import './App.css';
+import React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import TheList from './components/theList';
 import { AppBar, Container, Toolbar, Typography } from '@mui/material';
 import { Edit } from '@mui/icons-material';
 
+export const theAPI = React.createContext()
+
 function App() {
   return (  
     <>
+      <theAPI.Provider value="https://tame-culottes-lamb.cyclic.app/api/">
       <CssBaseline enableColorScheme />
       <AppBar position="relative">
         <Toolbar>
@@ -22,6 +26,7 @@ function App() {
         <TheList />  
       
       </main>
+      </theAPI.Provider>
     </>
   );
 }

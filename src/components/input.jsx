@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import axios from "axios";
 import { TextField, Button } from "@mui/material";
 import SendIcon from '@mui/icons-material/Send';
@@ -6,12 +6,13 @@ import Stack from '@mui/material/Stack';
 import { Box } from "@mui/system";
 import Grid from '@mui/material/Grid';
 import {makeStyles} from '@mui/styles';
-
+import { theAPI } from "../App";
 const useStyles = makeStyles((theme)=>({
 
 }))
 
 function InputData(props) {
+const api = useContext(theAPI)
 
 const [task, setTask] = useState("")
 
@@ -24,7 +25,7 @@ function handleSubmit(e) {
         e.preventDefault()
         return ;
     }
-     axios.post("https://tame-culottes-lamb.cyclic.app/api", {task:task})
+     axios.post(api, {task:task})
             .then(response =>
                 props.addTask(response.data)
             )
