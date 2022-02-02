@@ -43,6 +43,7 @@ function letsEditATask(task,id) {
                     variant="outlined" 
                     value={task} 
                     onChange={(e) => setTask(e.target.value)}
+                    onBlur={() => letsEditATask(task, props)}
                     size="small"
                     fullWidth
                 >

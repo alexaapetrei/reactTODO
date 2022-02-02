@@ -12,7 +12,7 @@ function NavBar(props) {
         <Toolbar>
           <Edit />
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            An API based ToDo app with MateriaUI
+            MUI API app
           </Typography>
             {props.children}
         </Toolbar>

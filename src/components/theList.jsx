@@ -3,7 +3,7 @@ import axios from "axios";
 import ATask from "./aTask";
 import InputData from "./input";
 import List from '@mui/material/List';
-import { Container } from "@mui/material";
+import { Container,Grid } from "@mui/material";
 import { theAPI } from "../App";
 
 function TheList(props) {
@@ -69,7 +69,9 @@ function TheList(props) {
 
      return(
         <main>
-        <Container>
+        <Grid container spacing={2} sx={{ flexGrow: 1 }}>
+        <Grid item xs={0} md={2}></Grid>
+        <Grid item xs={12} md={8}>
             <InputData addTask={AddTask} />
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
             
@@ -83,7 +85,9 @@ function TheList(props) {
              />
             )} 
             </List>
-        </Container>
+          </Grid>
+          <Grid item xs={0} md={2}></Grid>
+        </Grid>
         </main>
      )
      

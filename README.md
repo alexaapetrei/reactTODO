@@ -1,6 +1,8 @@
-# A small react app to learn Material UO
+# A small react app to learn Material UI
 
 So yeah , all the create react app stff plus some more things that I'm getting to know better .
+## Check it out here
+Open [Live APP Here](https://reactvite.netlify.app/) the app is deployed here , any update is reflected here also
 
 ## Available Scripts
 
