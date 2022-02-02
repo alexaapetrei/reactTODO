@@ -18,15 +18,17 @@ function TheList(props) {
     ),[])
 
     function EditATask(val) {
-        console.log("we are editing somehtign "+ val.id)
+        console.log("we are --   "+ val.task)
         console.log(val)
         let editedTask = prompt("Change the task to: ", val.task)
-        if(editedTask == null || editedTask === ""){
+        if(editedTask == null || editedTask === "" || editedTask == val.task){
             console.log("we didant change it")
         }
         else {
                axios.put(api+val.id,{done:val.done,task:editedTask})
-               .then(window.location.reload()) 
+               .then(
+                 window.location.reload()
+                 ) 
               
         }
     }
@@ -59,7 +61,7 @@ function TheList(props) {
     }
 
      return(
-         
+        <main>
         <Container>
             <InputData addTask={AddTask} />
             <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
@@ -75,7 +77,7 @@ function TheList(props) {
             )} 
             </List>
         </Container>
-         
+        </main>
      )
      
 }

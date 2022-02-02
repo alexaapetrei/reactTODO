@@ -21,13 +21,13 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "dev": "vite",
-    "v-build": "vite build",
+    "start": "vite",
+    "build": "vite build",
     "preview": "vite preview",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "c-start": "react-scripts start",
+    "c-build": "react-scripts build",
+    "c-test": "react-scripts test",
+    "c-eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
