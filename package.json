@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "^20"
+  },
   "name": "bettertodo",
   "private": true,
   "proxy": "https://tame-culottes-lamb.cyclic.app",
@@ -10,6 +13,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
+
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
