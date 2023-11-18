@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import ListItem from "@mui/material/ListItem";
@@ -7,24 +7,40 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
-import { TextField, Button } from "@mui/material";
+import { TextField } from "@mui/material";
 
-const ATask = (props) => {
-  const [editing, setEditing] = useState(false);
-  const [task, setTask] = useState(props.task);
+interface Task {
+  id: string;
+  task: string;
+  done: boolean;
+}
 
-  function letsEditATask(task, id) {
+interface ATaskProps {
+  removeTask: (id: string) => void;
+  editATask: (etask: string, val: Task) => void;
+  toggleDone: (task: Task) => void;
+  task: string;
+  id: string;
+  done: boolean;
+}
+
+const ATask = ({ removeTask, editATask, toggleDone, task, id, done }: ATaskProps) => {
+  const [editing, setEditing] = useState<boolean>(false);
+  const [currentTask, setCurrentTask] = useState<string>(task);
+
+  function letsEditATask(newTask: string) {
     setEditing(false);
-    props.editATask(task, id);
-    console.log("rand ist");
+    editATask(newTask, { task, id, done });
+    console.log("Edited task");
   }
+
   return (
     <ListItem
       secondaryAction={
         <IconButton
           edge="end"
-          aria-label="comments"
-          onClick={() => props.removeTask(props.id)}
+          aria-label="delete"
+          onClick={() => removeTask(id)}
         >
           <DeleteForeverIcon />
         </IconButton>
@@ -34,8 +50,8 @@ const ATask = (props) => {
       <ListItemButton dense>
         <ListItemIcon>
           <Checkbox
-            checked={props.done}
-            onClick={() => props.toggleDone(props)}
+            checked={done}
+            onClick={() => toggleDone({ task, id, done })}
           />
         </ListItemIcon>
 
@@ -43,24 +59,24 @@ const ATask = (props) => {
           <>
             <TextField
               variant="outlined"
-              value={task}
-              onChange={(e) => setTask(e.target.value)}
-              onBlur={() => letsEditATask(task, props)}
+              value={currentTask}
+              onChange={(e) => setCurrentTask(e.target.value)}
+              onBlur={() => letsEditATask(currentTask)}
               size="small"
               fullWidth
-            ></TextField>
+            />
             <IconButton
               edge="end"
-              aria-label="ediy this"
-              onClick={() => letsEditATask(task, props)}
+              aria-label="edit"
+              onClick={() => letsEditATask(currentTask)}
             >
               <EditIcon />
             </IconButton>
           </>
         ) : (
           <ListItemText
-            id={props.id}
-            primary={task}
+            id={id}
+            primary={currentTask}
             onClick={() => setEditing(true)}
           />
         )}

@@ -1,16 +1,12 @@
-import react from "react";
-import {
-  AppBar,
-  Container,
-  IconButton,
-  Toolbar,
-  Typography,
-} from "@mui/material";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
+import React from "react";
+import { AppBar, Toolbar, Typography } from "@mui/material";
 import { Edit } from "@mui/icons-material";
 
-function NavBar(props) {
+interface NavBarProps {
+  children: React.ReactNode;
+}
+
+const NavBar: React.FC<NavBarProps> = ({ children }) => {
   return (
     <>
       <AppBar position="relative">
@@ -19,11 +15,11 @@ function NavBar(props) {
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             MUI API app
           </Typography>
-          {props.children}
+          {children}
         </Toolbar>
       </AppBar>
     </>
   );
-}
+};
 
 export default NavBar;
