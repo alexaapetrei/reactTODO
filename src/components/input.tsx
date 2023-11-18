@@ -1,41 +1,30 @@
-import React, { useContext, useState } from "react";
+import { useState, FormEvent } from "react";
 import axios from "axios";
 import { TextField, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import Stack from "@mui/material/Stack";
-import { Box } from "@mui/system";
 import Grid from "@mui/material/Grid";
-import { makeStyles } from "@mui/styles";
-import { theAPI } from "../App";
-const useStyles = makeStyles((theme) => ({}));
+import { Task } from "./theList";
+import { api } from "../main";
 
-function InputData(props) {
-  const api = useContext(theAPI);
 
-  const [task, setTask] = useState("");
+interface InputDataProps {
+  addTask: (task: Task) => void;
+}
 
-  function handleChange(event) {
-    setTask(event.value);
-  }
+function InputData({ addTask }: InputDataProps) {
+  const [task, setTask] = useState<string>("");
 
-  function handleSubmit(e) {
-    if (!task) {
-      e.preventDefault();
-      return;
-    }
-    axios
-      .post(api, { task: task })
-      .then((response) => props.addTask(response.data));
+  function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    if (!task) return;
+    
+    axios.post(api, { task })
+      .then((response) => addTask(response.data));
     setTask("");
   }
+
   return (
-    <form
-      sx={{ flexGrow: 1 }}
-      onSubmit={(e) => {
-        handleSubmit(e);
-      }}
-    >
+    <form onSubmit={handleSubmit}>
       <Grid container spacing={2} alignItems="center">
         <Grid item xs={8}>
           <TextField
@@ -56,7 +45,6 @@ function InputData(props) {
             endIcon={<SendIcon />}
             type="submit"
           >
-            {" "}
             Add It
           </Button>
         </Grid>
